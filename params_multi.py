@@ -1,5 +1,5 @@
 # Data
-pth = 'code_keras/data/NASA'
+pth = 'model_build/data/NASA'
 seq_len = 5 # time steps or history window size
 hop = 1 # overlap between steps
 k = 3 # kfold cross validation
@@ -29,7 +29,7 @@ dropout_enc = 0.
 
 # Save Directory
 test_data = 'B18' # change based on which test data is used in the current experiment
-save_dir = 'code_keras/saved_models_multi/'+str(model.__name__)+'_'+test_data
+save_dir = 'model_build/saved_models_multi/'+str(model.__name__)+'_'+test_data
 # save_dir = 'code_keras/saved_models_multi/'+str(model.__name__)+'_'+test_data+'_'+str(time_embed)+'_head'+str(num_head)
 model_dir = str(model.__name__)+'_h'+str(hidden_dim)+'_bs'+str(batch_size)+ \
 			'_ep'+str(epochs)+'_w'+str(seq_len)+'_Adam_lr'+str(lr)
