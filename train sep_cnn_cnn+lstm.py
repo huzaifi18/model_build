@@ -120,9 +120,14 @@ def main():
                              strides=1, padding="same",
                              name="CNN_layer_t")(input_CNN_t)
 
-        # fusion layer both
+        # fusion CNN
+        concat_cnn = concatenate([CNN_layer_v, CNN_layer_i, CNN_layer_t])
 
-        concat = concatenate([LSTM_layer, CNN_layer_v, CNN_layer_i, CNN_layer_t])
+        CNN_fusion = Conv1D(32, 5, activation='relu',
+                            strides=1, padding='same',
+                            name="CNN_fusion")(concat_cnn)
+
+        concat = concatenate([LSTM_layer, CNN_fusion])
 
         flat = Flatten()(concat)
         output = Dense(32, activation='relu', name="Predictor")(flat)
@@ -132,8 +137,6 @@ def main():
 
         optim = Adam(learning_rate=pr.lr)
         model.compile(loss='mse', optimizer=optim)
-
-        model.summary()
 
         history = model.fit(x=[trainX_lstm, v_trainX_cnn, i_trainX_cnn, t_trainX_cnn],
                             y=[trainY_lstm, v_trainY_cnn, i_trainY_cnn, t_trainY_cnn],
