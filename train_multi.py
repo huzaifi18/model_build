@@ -96,7 +96,6 @@ def extract_VIT_capacity(x_datasets, y_datasets, seq_len, hop, sample):
         for i in range(data_len):
             x.append(scaled_x[(hop*i):(hop*i+seq_len), :])
             y.append(scaled_x[hop*i+seq_len, -1])
-            print(np.array(y).shape)
             # z.append(y_df[hop*i+seq_len, 1])
         SS.append(scaler)
         # import pdb; pdb.set_trace()
